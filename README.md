@@ -18,7 +18,7 @@ all processes will be related to the session ID in the database.
 
 First You Regist or login if there is a sign account 
 then You can Ask Chat bot some of basic mathematical operations 
-must operation separated with space as  (1 + 2 )  or ( add i to 2 )  not like  (1+2) or (add1to2)
+must operation separated with space as  (1 + 2 )  or ( add 1 to 2 )  not like  (1+2) or (add1to2)
 
 task can solve 
 addition [ (+ or add or and)  $number1 , $number2]
@@ -29,4 +29,12 @@ square root [ square  $number]
 
 
 You can any other operators by add its Data in DB as
-key value and its built function if found .
+key value and its built function if found . 
+Note : in Data base Table operators id Colom oneNum== 0 then cant pass message that have only one number as [add 1]  ,
+must has at least two numbers as [add 1 to 2]
+else can allow to pass only one number as square function Ex : [square 9 ]
+
+
+Note : 
+if Chat bot ask You abaut Your feedBack then your should answer from allowed Choices else  will ask you for correct answer again .
+that Also with  ask to complete or Finish  .
