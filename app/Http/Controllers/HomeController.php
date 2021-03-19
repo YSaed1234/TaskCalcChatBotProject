@@ -33,18 +33,26 @@ class HomeController extends Controller
     public function send(Request  $request)
     {
         $matches = [] ;
+        $feedbackError=false;
+        $finishError=false;
         $lastOne =UserLog::orderBy('id','DESC')->first();
         $data=$request->all();
         $data['user_id']=auth()->user()->id;
         $data['action']='send';
         if($lastOne &&  $lastOne->action=='feedback'){
         $data['tag'] = 'feedback';
-        }elseif($lastOne &&  $lastOne->action=='finish'){
-        $data['tag'] = 'finish';
+        if (!in_array($data['message'],['1','2','3'])){
+            $feedbackError = true ;
         }
+        }
+        elseif($lastOne &&  $lastOne->action=='finish'){
+        $data['tag'] = 'finish';
+            if (!in_array($data['message'],['1','2'])){
+                $finishError = true ;
+            } }
         UserLog::create($data);
         $messageArray = explode(' ' , $data['message']);
-
+        unset($data['tag']);
         if ($data['message'] == '1'){
             if (!$lastOne){
                 $data['message'] = 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
@@ -69,7 +77,8 @@ class HomeController extends Controller
                 $data['action'] = 'Recive';
                 UserLog::create($data);
             }
-}elseif ($data['message'] == '2'){
+}
+        elseif ($data['message'] == '2'){
 
 
             if (!$lastOne){
@@ -95,7 +104,9 @@ class HomeController extends Controller
                 $data['action'] = 'Recive';
                 UserLog::create($data);
             }
-}elseif ($data['message'] == '3'){
+
+        }
+        elseif ($data['message'] == '3'){
             if (!$lastOne){
                 $data['message'] = 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
@@ -121,10 +132,15 @@ class HomeController extends Controller
 else {
     $messageAppend=''; // appended message
     $baseWordsArray=['hi','hello','mornning']; // as more common words to be replied correctly .
+    $FunctionWithOneNumberArray=['square']; // as more common words to be replied correctly .
+    $passOneNumber = false ;
     foreach ($messageArray as $word){
         if (is_numeric($word)){
             $matches[]=$word;
         }else{
+            if (in_array($word,$FunctionWithOneNumberArray)){
+                $passOneNumber = true;
+            }
             if (in_array($word,$baseWordsArray))
                 $messageAppend .=   $word . ' ' .auth()->user()->name . '  , ';
         }
@@ -135,21 +151,26 @@ else {
     if(count($matches) == 0){$data['message'] =$messageAppend . 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
             $data['action'] = 'Recive';
             UserLog::create($data);
-        }else if(count($matches) == 1){$data['message'] = $messageAppend .'please type another  numbers to be calculated ..! ';
+        }else if(count($matches) == 1 and !$passOneNumber ){
+
+        $data['message'] = $messageAppend .'please type another  numbers to be calculated ..! ';
             $data['action'] = 'Recive';
             UserLog::create($data);
-        }else{
+        }
+    else{
 
 
             $operators = Operators::all();
             $actionVal = '' ;
+            $functionVal = '' ;
             foreach ($operators as $oneOperator){
 
 if (in_array($oneOperator->key,$messageArray)){
     $actionVal = $oneOperator->value ;
+    $functionVal = $oneOperator->function ;
 }
             }
-            if ($actionVal == ''){
+            if ($actionVal == '' and $functionVal == ''){
                 $data['message'] =$messageAppend . 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
                 UserLog::create($data);
@@ -157,20 +178,36 @@ if (in_array($oneOperator->key,$messageArray)){
                 $data['message'] =$messageAppend . 'You Mean :'.implode($actionVal,$matches);
                 $data['action'] = 'Recive';
                 UserLog::create($data);
-
-                $result= $matches[0] ;
-                for ($i=1;$i<count($matches);$i++){
-                   eval('$result = ' . $result . $actionVal . $matches[$i] . ';');
- }
-                $data['message'] =$messageAppend . 'ABRACADABRA! it’s ' ."$result" ;
+                if ($functionVal!='' and !$passOneNumber){
+                    $data['message'] = 'ABRACADABRA! it’s ' ."{$functionVal($matches)}" ;
+                }elseif ($functionVal!='' and $passOneNumber){
+                    $data['message'] = 'ABRACADABRA! it’s ' ."{$functionVal($matches[0])}" ;
+                }else{
+                    $result= $matches[0] ;
+                    for ($i=1;$i<count($matches);$i++){
+                        eval('$result = ' . $result . $actionVal . $matches[$i] . ';');
+                    }
+                    $data['message'] = 'ABRACADABRA! it’s ' ."$result" ;
+                }
                 $data['action'] = 'Recive';
                 UserLog::create($data);
-                $data['message'] =$messageAppend . ' please send 1 if you think my answer is correct, 2 if it’s wrong, or 3 if you don’t know. ' ;
+                $data['message'] = ' please send 1 if you think my answer is correct, 2 if it’s wrong, or 3 if you don’t know. ' ;
                 $data['action'] = 'feedback';
                 UserLog::create($data);
             }
 
 }
+}
+
+if ($feedbackError){
+    $data['message'] = ' please send 1 if you think my answer is correct, 2 if it’s wrong, or 3 if you don’t know. ' ;
+    $data['action'] = 'feedback';
+    UserLog::create($data);
+}
+if ($finishError){
+    $data['message'] = ' If you need a new process send 1 or 2 to end this session.';
+    $data['action'] = 'finish';
+    UserLog::create($data);
 }
         return $this->search(new Request() );
     }

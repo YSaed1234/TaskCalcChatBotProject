@@ -22,6 +22,7 @@ class Operators extends Authenticatable
     protected $fillable = [
         'key',
         'value',
+        'function',
     ];
 
 }

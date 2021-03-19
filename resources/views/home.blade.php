@@ -8,7 +8,9 @@
     }
 </style>
 @section('content')
+    @if (auth()->user())
 <div class="container" >
+
     <div class="row justify-content-center">
         <div class="col-md-6" >
             <div  class=" card"  style="height: 550px ; width: 400px">
@@ -99,6 +101,7 @@
         </div>
     </div>
 </div>
+    @endif
 @endsection
 <link rel="stylesheet" href="{{asset('assets/css/sweetalert2.css')}}" />
 <script src="{{asset('assets/js/sweetalert2.all.min.js')}}"></script>
