@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="fd842e2c-3734-4d37-853d-df6339c4b2b9" name="Default Changelist" comment="" />
+    <list default="true" id="fd842e2c-3734-4d37-853d-df6339c4b2b9" name="Default Changelist" comment="add Sql file" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -146,11 +146,17 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1616174402935</updated>
-      <workItem from="1616174404088" duration="314000" />
+      <workItem from="1616174404088" duration="1215000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="513" y="97" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1616175537623">
+      <screen x="0" y="0" width="1366" height="728" />
+    </state>
+    <state x="513" y="97" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog/0.0.1366.728@0.0.1366.728" timestamp="1616175537623" />
   </component>
 </project>

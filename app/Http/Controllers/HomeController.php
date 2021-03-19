@@ -32,6 +32,7 @@ class HomeController extends Controller
 
     public function send(Request  $request)
     {
+
         $matches = [] ;
         $lastOne =UserLog::orderBy('id','DESC')->first();
         $data=$request->all();
