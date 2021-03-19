@@ -20,6 +20,7 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/feedBake', [App\Http\Controllers\HomeController::class, 'feedBake'])->name('feedBake');
 
 Route::prefix('message')->group(function () {
     Route::post('send', [\App\Http\Controllers\HomeController::class, 'send']);

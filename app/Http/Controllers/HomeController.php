@@ -28,6 +28,23 @@ class HomeController extends Controller
     {
         return view('home');
     }
+    public function feedBake()
+    {
+
+        $UserFeedBacks = UserLog::
+        where('user_id',auth()->user()->id)
+
+            ->where(function($query){
+                return $query
+            ->where('tag','feedback')->whereIn('message',['1','2','3']);
+
+            })->orwhere(function($query){
+                return $query
+                    ->WhereNull('tag')->where('action','send');
+            })
+            ->orderby('id','asc')->get();
+        return view('feedback')->with(['UserFeedBacks'=>$UserFeedBacks]);
+    }
 
 
     public function send(Request  $request)

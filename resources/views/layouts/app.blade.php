@@ -73,8 +73,23 @@
                                     </form>
                                 </div>
                             </li>
+
+                            @if (Route::has('feedBake'))
+
+                                <li>    <a class="nav-link" href="{{ route('home') }}">Home</a>
+                                </li>
+                            @endif
+                            @if (Route::has('home'))
+
+                                <li>    <a class="nav-link" href="{{ route('feedBake') }}">FeedBack</a>
+                                </li>
+                            @endif
                         @endguest
+
                     </ul>
+
+
+
                 </div>
             </div>
         </nav>
