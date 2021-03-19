@@ -153,26 +153,33 @@ else {
     if (!$feedbackError && !$finishError) {
         $messageAppend = ''; // appended message
         $baseWordsArray = ['hi', 'hello', 'mornning']; // as more common words to be replied correctly .
-        $FunctionWithOneNumberArray = ['square']; // as more common words to be replied correctly .
-        $passOneNumber = false;
         foreach ($messageArray as $word) {
             if (is_numeric($word)) {
                 $matches[] = $word;
             } else {
-                if (in_array($word, $FunctionWithOneNumberArray)) {
-                    $passOneNumber = true;
-                }
+
                 if (in_array($word, $baseWordsArray))
                     $messageAppend .= $word . ' ' . auth()->user()->name . '  , ';
             }
         }
 
+        $operators = Operators::all();
+        $oneNumVal = 0;
+        $actionVal = '';
+        $functionVal = '';
+        foreach ($operators as $oneOperator) {
 
+            if (in_array($oneOperator->key, $messageArray)) {
+                $actionVal = $oneOperator->value;
+                $functionVal = $oneOperator->function;
+                $oneNumVal = $oneOperator->oneNum;
+            }
+        }
         if (count($matches) == 0) {
             $data['message'] = $messageAppend . 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
             $data['action'] = 'Recive';
             UserLog::create($data);
-        } else if (count($matches) == 1 and !$passOneNumber) {
+        } else if (count($matches) == 1 and $oneNumVal==0) {
 
             $data['message'] = $messageAppend . 'please type another  numbers to be calculated ..! ';
             $data['action'] = 'Recive';
@@ -180,16 +187,7 @@ else {
         } else {
 
 
-            $operators = Operators::all();
-            $actionVal = '';
-            $functionVal = '';
-            foreach ($operators as $oneOperator) {
 
-                if (in_array($oneOperator->key, $messageArray)) {
-                    $actionVal = $oneOperator->value;
-                    $functionVal = $oneOperator->function;
-                }
-            }
             if ($actionVal == '' and $functionVal == '') {
                 $data['message'] = $messageAppend . 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
@@ -198,9 +196,9 @@ else {
                 $data['message'] = $messageAppend . 'You Mean :' . implode($actionVal, $matches);
                 $data['action'] = 'Recive';
                 UserLog::create($data);
-                if ($functionVal != '' and !$passOneNumber) {
+                if ($functionVal != '' and $oneNumVal==0) {
                     $data['message'] = 'ABRACADABRA! it’s ' . "{$functionVal($matches)}";
-                } elseif ($functionVal != '' and $passOneNumber) {
+                } elseif ($functionVal != '' and $oneNumVal==1) {
                     $data['message'] = 'ABRACADABRA! it’s ' . "{$functionVal($matches[0])}";
                 } else {
                     $result = $matches[0];

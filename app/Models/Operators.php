@@ -23,6 +23,7 @@ class Operators extends Authenticatable
         'key',
         'value',
         'function',
+        'oneNum',
     ];
 
 }
