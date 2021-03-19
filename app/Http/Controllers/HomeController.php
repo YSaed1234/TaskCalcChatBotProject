@@ -41,6 +41,9 @@ class HomeController extends Controller
             })->orwhere(function($query){
                 return $query
                     ->WhereNull('tag')->where('action','send');
+            })->orwhere(function($query){
+                return $query
+                    ->WhereNull('tag')->where('action','Recive')->where('message','like','ABRACADABRA! it’s%');
             })
             ->orderby('id','asc')->get();
         return view('feedback')->with(['UserFeedBacks'=>$UserFeedBacks]);
