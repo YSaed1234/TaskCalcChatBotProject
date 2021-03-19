@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 19, 2021 at 07:37 PM
+-- Generation Time: Mar 20, 2021 at 12:11 AM
 -- Server version: 10.4.16-MariaDB
 -- PHP Version: 7.4.12
 
@@ -43,24 +43,25 @@ CREATE TABLE `operators` (
   `id` int(11) NOT NULL,
   `key` varchar(50) DEFAULT NULL,
   `value` varchar(5) DEFAULT NULL,
-  `function` varchar(50) DEFAULT NULL
+  `function` varchar(50) DEFAULT NULL,
+  `oneNum` int(11) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `operators`
 --
 
-INSERT INTO `operators` (`id`, `key`, `value`, `function`) VALUES
-(5, 'add', '+', 'array_sum'),
-(7, 'and', '+', 'array_sum'),
-(8, '+', '+', 'array_sum'),
-(9, 'minus', '-', ''),
-(10, '-', '-', ''),
-(11, 'multiplying', '*', ''),
-(12, '*', '*', ''),
-(13, 'dividing', '/', ''),
-(14, '/', '/', ''),
-(15, 'square', NULL, 'sqrt');
+INSERT INTO `operators` (`id`, `key`, `value`, `function`, `oneNum`) VALUES
+(5, 'add', '+', 'array_sum', 0),
+(7, 'and', '+', 'array_sum', 0),
+(8, '+', '+', 'array_sum', 0),
+(9, 'minus', '-', '', 0),
+(10, '-', '-', '', 0),
+(11, 'multiplying', '*', '', 0),
+(12, '*', '*', '', 0),
+(13, 'dividing', '/', '', 0),
+(14, '/', '/', '', 0),
+(15, 'square', NULL, 'sqrt', 1);
 
 -- --------------------------------------------------------
 
@@ -83,7 +84,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `name`, `email`, `password`, `created_at`, `updated_at`, `remember_token`) VALUES
-(1, 'yasmin', 'saedyasmin0@gmail.com', '$2y$10$fwDghNO1xFfNlkW3yxWOYuv4FD/nQuNBt556lVPDj89xMmEi5ApVS', '2021-03-18 14:24:42', '2021-03-18 14:24:42', 'VoHYlEG1pkFfv8j6wnzgteo4C1YGla7C952NdepObmNhFSmfrHm0IdsiL3Bg');
+(1, 'yasmin', 'saedyasmin0@gmail.com', '$2y$10$fwDghNO1xFfNlkW3yxWOYuv4FD/nQuNBt556lVPDj89xMmEi5ApVS', '2021-03-18 14:24:42', '2021-03-18 14:24:42', 'BjIEy0YBOQj0GtN2kDC1BL4y8iXjDCgAaf9EtKGU4NZHtuW2AjYCwIJUKffy');
 
 -- --------------------------------------------------------
 
@@ -100,27 +101,6 @@ CREATE TABLE `user_log` (
   `updated_at` datetime DEFAULT NULL,
   `tag` varchar(50) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
-
---
--- Dumping data for table `user_log`
---
-
-INSERT INTO `user_log` (`id`, `user_id`, `action`, `message`, `created_at`, `updated_at`, `tag`) VALUES
-(464, 1, 'send', 'add 1 to 9', '2021-03-19 18:35:44', '2021-03-19 18:35:44', NULL),
-(465, 1, 'Recive', 'You Mean :1+9', '2021-03-19 18:35:44', '2021-03-19 18:35:44', NULL),
-(466, 1, 'Recive', 'ABRACADABRA! it’s 10', '2021-03-19 18:35:44', '2021-03-19 18:35:44', NULL),
-(467, 1, 'feedback', ' please send 1 if you think my answer is correct, 2 if it’s wrong, or 3 if you don’t know. ', '2021-03-19 18:35:44', '2021-03-19 18:35:44', NULL),
-(468, 1, 'send', 'sadsad', '2021-03-19 18:35:57', '2021-03-19 18:35:57', 'feedback'),
-(469, 1, 'Recive', 'Your Data Not Accurat please type at least two numbers to be calculated ..! ', '2021-03-19 18:35:57', '2021-03-19 18:35:57', NULL),
-(470, 1, 'feedback', ' please send 1 if you think my answer is correct, 2 if it’s wrong, or 3 if you don’t know. ', '2021-03-19 18:35:57', '2021-03-19 18:35:57', NULL),
-(471, 1, 'send', '2', '2021-03-19 18:36:02', '2021-03-19 18:36:02', 'feedback'),
-(472, 1, 'Recive', 'Please Enter it With another Syntax to Try Again . ..... (Test ) ', '2021-03-19 18:36:02', '2021-03-19 18:36:02', NULL),
-(473, 1, 'finish', ' If you need a new process send 1 or 2 to end this session.', '2021-03-19 18:36:02', '2021-03-19 18:36:02', NULL),
-(474, 1, 'send', 'dasdsad', '2021-03-19 18:36:06', '2021-03-19 18:36:06', 'finish'),
-(475, 1, 'Recive', 'Your Data Not Accurat please type at least two numbers to be calculated ..! ', '2021-03-19 18:36:07', '2021-03-19 18:36:07', NULL),
-(476, 1, 'finish', ' If you need a new process send 1 or 2 to end this session.', '2021-03-19 18:36:07', '2021-03-19 18:36:07', NULL),
-(477, 1, 'send', '2', '2021-03-19 18:36:12', '2021-03-19 18:36:12', 'finish'),
-(478, 1, 'Recive', 'Good-Bye! Have a nice day.', '2021-03-19 18:36:12', '2021-03-19 18:36:12', NULL);
 
 --
 -- Indexes for dumped tables
@@ -176,7 +156,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `user_log`
 --
 ALTER TABLE `user_log`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=479;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=670;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
