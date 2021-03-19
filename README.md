@@ -16,7 +16,8 @@ all processes will be related to the session ID in the database.
 
 
 
-First You Regist or login if there is a sign account 
+First You initialize database name   (mworldtask)   in mysql then imort  mworldtask.sql file on it ,
+ Now you can  Regist or login if there is a sign account 
 then You can Ask Chat bot some of basic mathematical operations 
 must operation separated with space as  (1 + 2 )  or ( add 1 to 2 )  not like  (1+2) or (add1to2)
 
