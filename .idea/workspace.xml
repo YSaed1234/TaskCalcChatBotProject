@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd842e2c-3734-4d37-853d-df6339c4b2b9" name="Default Changelist" comment="add Sql file">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -177,7 +176,7 @@
       <workItem from="1616174404088" duration="1215000" />
       <workItem from="1616175718208" duration="9287000" />
       <workItem from="1616195448085" duration="258000" />
-      <workItem from="1616265502745" duration="1211000" />
+      <workItem from="1616265502745" duration="1351000" />
     </task>
     <task id="LOCAL-00001" summary="add Sql file">
       <created>1616175766006</created>
@@ -228,7 +227,14 @@
       <option name="project" value="LOCAL" />
       <updated>1616185929997</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="add Sql file">
+      <created>1616266797586</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1616266797586</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -255,10 +261,10 @@
       <screen x="0" y="0" width="1366" height="728" />
     </state>
     <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616182106444" />
-    <state x="317" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616185457398">
+    <state x="317" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616266511868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="317" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1616185457398" />
+    <state x="317" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.728@0.0.1366.728" timestamp="1616266511868" />
     <state x="513" y="97" key="com.intellij.openapi.vcs.changes.SpecificFilesViewDialog" timestamp="1616175892900">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

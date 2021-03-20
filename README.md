@@ -16,7 +16,8 @@ all processes will be related to the session ID in the database.
 
 
 
-First You initialize database name   (mworldtask)   in mysql then imort  mworldtask.sql file on it ,
+First You initialize database name   (mworldtask)   in mysql then import  mworldtask.sql file on it ,
+then Run Project with command [php artisan serve] ,
  Now you can  Regist or login if there is a sign account 
 then You can Ask Chat bot some of basic mathematical operations 
 must operation separated with space as  (1 + 2 )  or ( add 1 to 2 )  not like  (1+2) or (add1to2)
