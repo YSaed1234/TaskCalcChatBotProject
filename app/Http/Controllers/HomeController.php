@@ -153,13 +153,14 @@ else {
     if (!$feedbackError && !$finishError) {
         $messageAppend = ''; // appended message
         $baseWordsArray = ['hi', 'hello', 'mornning']; // as more common words to be replied correctly .
-        foreach ($messageArray as $word) {
-            if (is_numeric($word)) {
-                $matches[] = $word;
+        for ($i=0 ; $i < count($messageArray); $i++) {
+            if (is_numeric($messageArray[$i])) {
+                $matches[] = $messageArray[$i];
             } else {
-
-                if (in_array($word, $baseWordsArray))
-                    $messageAppend .= $word . ' ' . auth()->user()->name . '  , ';
+$messageArray[$i]=strtolower ($messageArray[$i]);
+//var_dump($messageArray[$i]);
+                if (in_array($messageArray[$i], $baseWordsArray))
+                    $messageAppend .= $messageArray[$i] . ' ' . auth()->user()->name . '  , ';
             }
         }
 

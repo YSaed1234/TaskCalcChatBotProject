@@ -20,6 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd842e2c-3734-4d37-853d-df6339c4b2b9" name="Default Changelist" comment="add Sql file">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -27,7 +28,7 @@
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
-  <component name="ComposerSettings">
+  <component name="ComposerSettings" doNotAsk="true">
     <pharConfigPath>$PROJECT_DIR$/composer.json</pharConfigPath>
     <execution />
   </component>
@@ -175,6 +176,8 @@
       <updated>1616174402935</updated>
       <workItem from="1616174404088" duration="1215000" />
       <workItem from="1616175718208" duration="9287000" />
+      <workItem from="1616195448085" duration="258000" />
+      <workItem from="1616265502745" duration="1211000" />
     </task>
     <task id="LOCAL-00001" summary="add Sql file">
       <created>1616175766006</created>
@@ -241,6 +244,7 @@
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="add Sql file" />
