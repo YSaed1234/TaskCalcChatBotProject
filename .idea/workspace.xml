@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="fd842e2c-3734-4d37-853d-df6339c4b2b9" name="Default Changelist" comment="add Sql file">
-      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" beforeDir="false" afterPath="$PROJECT_DIR$/app/Http/Controllers/HomeController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/resources/views/home.blade.php" beforeDir="false" afterPath="$PROJECT_DIR$/resources/views/home.blade.php" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +158,7 @@
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../gfactory-prod-api" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../TaskCalcChatBot" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -177,6 +179,7 @@
       <workItem from="1616175718208" duration="9287000" />
       <workItem from="1616195448085" duration="258000" />
       <workItem from="1616265502745" duration="1351000" />
+      <workItem from="1616320627936" duration="2399000" />
     </task>
     <task id="LOCAL-00001" summary="add Sql file">
       <created>1616175766006</created>
@@ -257,10 +260,10 @@
     <option name="LAST_COMMIT_MESSAGE" value="add Sql file" />
   </component>
   <component name="WindowStateProjectService">
-    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1616182106444">
+    <state x="463" y="118" key="FileChooserDialogImpl" timestamp="1616320691068">
       <screen x="0" y="0" width="1366" height="728" />
     </state>
-    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616182106444" />
+    <state x="463" y="118" key="FileChooserDialogImpl/0.0.1366.728@0.0.1366.728" timestamp="1616320691068" />
     <state x="317" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1616266511868">
       <screen x="0" y="0" width="1366" height="728" />
     </state>

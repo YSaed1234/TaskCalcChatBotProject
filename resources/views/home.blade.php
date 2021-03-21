@@ -158,4 +158,13 @@
 
 
     });
+        // $(document).keyup('#Message',function() {
+        //     /* I EVEN TRIED TO TRIM IT TO NO AVAIL */
+        //     var content = $.trim($('#Message').val());
+        //     if(content.length === 0) {
+        //         $('#SendBtn').hide();
+        //     } else {
+        //         $('#SendBtn').show();
+        //     }
+        // });
     </script>

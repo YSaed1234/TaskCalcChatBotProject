@@ -52,12 +52,13 @@ class HomeController extends Controller
 
     public function send(Request  $request)
     {
-        $matches = [] ;
-        $feedbackError=false;
-        $finishError=false;
-        $lastOne =UserLog::orderBy('id','DESC')->first();
+        $matches = [] ; // numbers array
+        $feedbackError=false; // if reply from user not allowed on feedback case
+        $finishError=false; // if reply from user not allowed on finish case
+        $lastOne =UserLog::orderBy('id','DESC')->first(); // get last row in db to know its Type  ( finish , feedback ,send , recive)
         $data=$request->all();
         $data['user_id']=auth()->user()->id;
+
         $data['action']='send';
         if($lastOne &&  $lastOne->action=='feedback'){
         $data['tag'] = 'feedback';
@@ -70,35 +71,41 @@ class HomeController extends Controller
             if (!in_array($data['message'],['1','2'])){
                 $finishError = true ;
             } }
+
+        // add user reply in DB as Send Action
         UserLog::create($data);
         $messageArray = explode(' ' , $data['message']);
         unset($data['tag']);
-        if ($data['message'] == '1'){
-            if (!$lastOne){
+
+
+
+        if ($data['message'] == '1'){ // if user reply 1
+            if (!$lastOne){ // if it first message
                 $data['message'] = 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
                 UserLog::create($data);
-            } elseif($lastOne &&  $lastOne->action=='finish'){
+            } elseif($lastOne &&  $lastOne->action=='finish'){ // if it reply message for finish
                 $data['message'] = 'Send Your Next Mathematical Statment.';
                 $data['action'] = 'Recive';
                 UserLog::create($data);
-            }elseif($lastOne &&  $lastOne->action=='feedback'){
+            }elseif($lastOne &&  $lastOne->action=='feedback'){  // if it reply message for feedback
                 $data['message'] = 'OH, Great.';
                 $data['action'] = 'Recive';
                 UserLog::create($data);
 
+                // finish ask
                 $data['message'] = ' If you need a new process send 1 or 2 to end this session.';
                 $data['action'] = 'finish';
                 UserLog::create($data);
 
 
-            }else{
+            }else{  // if it reply message  not first and not finish answer and there are old messages then need to add another number to complete the process as ambigous statement
                 $data['message'] = 'please type another  numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
                 UserLog::create($data);
             }
 }
-        elseif ($data['message'] == '2'){
+        elseif ($data['message'] == '2'){ // if user reply 2
 
 
             if (!$lastOne){
@@ -126,7 +133,7 @@ class HomeController extends Controller
             }
 
         }
-        elseif ($data['message'] == '3'){
+        elseif ($data['message'] == '3'){ // if user reply 3
             if (!$lastOne){
                 $data['message'] = 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
@@ -149,16 +156,15 @@ class HomeController extends Controller
                 UserLog::create($data);
             }
 }
-else {
-    if (!$feedbackError && !$finishError) {
+else { // if user reply text message
+    if (!$feedbackError && !$finishError) { // if message not reply for finish or feedback Q
         $messageAppend = ''; // appended message
         $baseWordsArray = ['hi', 'hello', 'mornning']; // as more common words to be replied correctly .
         for ($i=0 ; $i < count($messageArray); $i++) {
             if (is_numeric($messageArray[$i])) {
                 $matches[] = $messageArray[$i];
             } else {
-$messageArray[$i]=strtolower ($messageArray[$i]);
-//var_dump($messageArray[$i]);
+                $messageArray[$i]=strtolower ($messageArray[$i]); // make searched words as lower case to comapre it easy
                 if (in_array($messageArray[$i], $baseWordsArray))
                     $messageAppend .= $messageArray[$i] . ' ' . auth()->user()->name . '  , ';
             }
@@ -168,7 +174,7 @@ $messageArray[$i]=strtolower ($messageArray[$i]);
         $oneNumVal = 0;
         $actionVal = '';
         $functionVal = '';
-        foreach ($operators as $oneOperator) {
+        foreach ($operators as $oneOperator) { // compare DB operators with message words
 
             if (in_array($oneOperator->key, $messageArray)) {
                 $actionVal = $oneOperator->value;
@@ -176,11 +182,11 @@ $messageArray[$i]=strtolower ($messageArray[$i]);
                 $oneNumVal = $oneOperator->oneNum;
             }
         }
-        if (count($matches) == 0) {
+        if (count($matches) == 0) { // there is no any numbers
             $data['message'] = $messageAppend . 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
             $data['action'] = 'Recive';
             UserLog::create($data);
-        } else if (count($matches) == 1 and $oneNumVal==0) {
+        } else if (count($matches) == 1 and $oneNumVal==0) { // only have one num and operator not allow less than two numbers
 
             $data['message'] = $messageAppend . 'please type another  numbers to be calculated ..! ';
             $data['action'] = 'Recive';
@@ -188,12 +194,11 @@ $messageArray[$i]=strtolower ($messageArray[$i]);
         } else {
 
 
-
-            if ($actionVal == '' and $functionVal == '') {
+            if ($actionVal == '' and $functionVal == '') {// operators not match with any message word
                 $data['message'] = $messageAppend . 'Your Data Not Accurat please type at least two numbers to be calculated ..! ';
                 $data['action'] = 'Recive';
                 UserLog::create($data);
-            } else {
+            } else { // calc operation
                 $data['message'] = $messageAppend . 'You Mean :' . implode($actionVal, $matches);
                 $data['action'] = 'Recive';
                 UserLog::create($data);
@@ -208,7 +213,7 @@ $messageArray[$i]=strtolower ($messageArray[$i]);
                     }
                     $data['message'] = 'ABRACADABRA! it’s ' . "$result";
                 }
-                $data['action'] = 'Recive';
+                $data['action'] = 'Recive'; // feedback ask
                 UserLog::create($data);
                 $data['message'] = ' please send 1 if you think my answer is correct, 2 if it’s wrong, or 3 if you don’t know. ';
                 $data['action'] = 'feedback';
